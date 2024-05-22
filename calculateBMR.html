@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css";>
+    <style>
+    
+        h2{
+            text-align: center;
+        }
+        .serv{
+        
+            text-align: center;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        
+        }
+        fieldset{
+            margin-left: 20px;
+            margin-right: 20px;
+            border: 3px solid #065507;
+            border-radius: 20px;
+        }
+        fieldset.appo{
+            
+            margin-left: 20px;
+            margin-right: 20px;
+            
+            border: 3px solid #065507;
+            
+            border-radius: 25px;
+           
+        
+        }
+        legend{
+            border-radius: 90px;
+            
+        }
+        form{
+            font-family:'Times New Roman', Times, serif;
+        font-size: 26px;
+        font-style: italic;
+        color: #065507;
+        padding: 12px;
+        
+        }
+        .bmrForm,input{
+            font-family:'Times New Roman', Times, serif;
+        font-size: 26px;
+        font-style: italic;
+        color: #065507;
+        padding: 12px;
+        input{
+            margin-right: 20px;
+            margin-left: 20px;
+            margin-top: 10px;
+            
+            border: 2px solid;
+            padding: 6px;
+            border-radius: 12px;
+        
+        }
+        
+        }
+        .result{
+            font-family:'Times New Roman', Times, serif;
+        font-size: 26px;
+        font-style: italic;
+        color: #065507;
+        padding: 12px;
+        
+        }
+        input{
+            margin-right: 20px;
+            margin-left: 20px;
+            margin-top: 10px;
+            
+            border: 2px solid;
+            padding: 6px;
+            border-radius: 12px;
+        
+        }
+        input[type='checkbox'],input[type='radio']{
+            accent-color: green;
+        }
+        
+        
+        
+            
+        
+        
+        
+        
+        </style>
+    
+    
+
+
+</head>
+<html>
+  
+<body>
+    <div class = "nav">
+        <nav>
+            <label class="logo" > PurePlate Pointer </label>
+            
+        <ul>
+            <li><a href="PurePlate Pointer.html">Home</a></li>
+            <li><a href="serv.html">Services</a></li>
+            <li><a href="Reviews.html">Reviews</a></li>
+            <li><a href="res-Resources Page.html">Resources</a></li>
+            <li><a href="AboutUs.html">About Us</a></li>
+            <li ><a  href="ContactUs.html">Contact Us</a></li>
+            <li ><a  href="calculateBMR.html">BMR</a></li>
+    
+
+        </ul>
+        
+        </nav>
+           
+        <br><br><br><br><br><br><br>
+   
+        </div>
+ 
+<br><br><br><br>
+<div class="container-fluid">
+<fieldset class="appo">
+    <legend><h1 style="font-style: italic;">Calculate BMR</h1></legend>
+    <br>
+    
+    <form id="bmrForm" onsubmit="return calculateBMR()">
+        <div class="row">
+            <div class="col">
+        <label>Gender:</label>
+        <input type="radio" id="male" name="gender" value="male" >
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label>
+        <span id="gval" style=" font-size: large; color: #dc0606;"></span><br><br>
+
+        
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="weight" name="weight" required> 
+        <span id="wval" style="font-size: large; color: #dc0606;"></span><br><br>
+        
+        <label for="height">Height (cm):</label>
+        <input type="number" id="height" name="height" required> 
+        <span id="hval" style="font-size: large; color: #dc0606;"></span><br><br>
+        
+        <label for="age">Age (years):</label>
+        <input type="number" id="age" name="age" required>
+        <span id="aval" style="font-size: large; color: #dc0606;"!important></span><br><br>
+
+        <div id="result" class="result"></div>
+        <div class="card-content">
+        <input type="submit" value="Calculate BMR" class="btn">
+        </div>
+    </div>
+        
+        <div class="col">
+        <textarea style="margin-left: 60px; margin-bottom: 80px; position: relative"  id="bmrResult" rows="21" cols="50" ></textarea>
+    </div>
+        </div>
+
+
+        
+    </form>
+ 
+        
+    
+
+</div>
+    <br>
+
+<script>
+    function calculateBMR() {
+        var gender = document.querySelector('input[name="gender"]:checked');
+        var weight = parseFloat(document.getElementById("weight").value);
+        var height = parseFloat(document.getElementById("height").value);
+        var age = parseInt(document.getElementById("age").value);
+        var bmr = 0;
+        var vall=false;
+        
+        if(gender&&weight >= 25 && weight <= 300&&height > 130 && height <= 250&&age > 0 && age <= 120)
+        {
+                    document.getElementById("aval").innerHTML = "";
+                    document.getElementById("hval").innerHTML = "";
+                    document.getElementById("wval").innerHTML = "";
+                    document.getElementById("gval").innerHTML = "";
+            gender = gender.value;
+         vall=true;
+        }
+        else if(!gender&&weight < 25 || weight >= 300&&height < 130 || height >= 250&&age < 0 || age >= 120) {
+                    document.getElementById("aval").innerHTML = "Please enter a valid age";
+                    document.getElementById("hval").innerHTML = "Please enter a valid height";
+                    document.getElementById("wval").innerHTML = "Please enter a valid weight";
+                    document.getElementById("gval").innerHTML = "Please choose a gender";
+                    return false;
+                }  
+                else{
+             if(!gender)
+             {
+                document.getElementById("gval").innerHTML = "Please choose a gender";
+             }
+             if(gender)
+             {
+                document.getElementById("gval").innerHTML = "";
+                gender = gender.value;
+
+             }
+             if(weight < 25 || weight >= 300)
+             {
+                document.getElementById("wval").innerHTML = "Please enter a valid weight";
+             }
+             if(weight > 25 && weight <= 300)
+             {
+                document.getElementById("wval").innerHTML = "";
+             }
+             if(height < 130 || height >= 250)
+             {
+                document.getElementById("hval").innerHTML = "Please enter a valid height";
+             }
+             if(height > 130 && height <= 250)
+             {
+                document.getElementById("hval").innerHTML = "";
+             }
+             if(age < 0 || age >= 120)
+             {
+                document.getElementById("aval").innerHTML = "Please enter a valid age";
+             }
+             if(age > 0 && age <= 120)
+             {
+                document.getElementById("aval").innerHTML = "";
+             }
+
+
+                }
+
+        
+
+                    // Calculate BMR
+                    if (gender == "male"&&vall== true) {
+                        bmr = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+
+                        document.getElementById("result").innerHTML = "Your Basal Metabolic Rate (BMR) is: " + bmr.toFixed(2) + " calories per day.";
+
+                    var resultTextArea = document.getElementById("bmrResult");
+                    resultTextArea.value = "Gender: " + gender + "\n" +
+                                           "Weight (kg): " + weight + "\n" +
+                                           "Height (cm): " + height + "\n" +
+                                           "Age (years): " + age + "\n\n" +
+                                           "Your Basal Metabolic Rate (BMR) is: " + bmr.toFixed(2) + " calories per day." +
+                                           "\n\n If You Want To Lose Weight You Should Eat Less Than Your BMR " +
+                                           "\n Or If You Want To Gain Weight You Should Eat More Than Your BMR " +
+                                           "\n Or If You Want To Maintain Your Weight You Should Eat Exactly as Your BMR ";
+                    } else if (gender == "female"&&vall== true){
+                        bmr = 447.593 + (9.247 * weight) + (3.098 * height) - (4.330 * age);
+
+                        document.getElementById("result").innerHTML = "Your Basal Metabolic Rate (BMR) is: " + bmr.toFixed(2) + " calories per day.";
+
+                    var resultTextArea = document.getElementById("bmrResult");
+                    resultTextArea.value = "Gender: " + gender + "\n" +
+                                           "Weight (kg): " + weight + "\n" +
+                                           "Height (cm): " + height + "\n" +
+                                           "Age (years): " + age + "\n\n" +
+                                           "Your Basal Metabolic Rate (BMR) is: " + bmr.toFixed(2) + " calories per day." +
+                                           "\n\n If You Want To Lose Weight You Should Eat Less Than Your BMR " +
+                                           "\n Or If You Want To Gain Weight You Should Eat More Than Your BMR " +
+                                           "\n Or If You Want To Maintain Your Weight You Should Eat Exactly as Your BMR ";
+                    }
+
+                
+                    return false;
+    }
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
